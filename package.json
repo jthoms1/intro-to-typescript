@@ -1,0 +1,25 @@
+{
+  "name": "madjs-nov-typescript",
+  "version": "1.0.0",
+  "description": "Typescript Demo for MadJS November 2017 (Drunken Typescript)",
+  "main": "index.js",
+  "scripts": {
+    "start": "stencil-dev-server --root ./slides",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jthoms1/madjs-nov-typescript.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jthoms1/madjs-nov-typescript/issues"
+  },
+  "homepage": "https://github.com/jthoms1/madjs-nov-typescript#readme",
+  "devDependencies": {
+    "@stencil/dev-server": "0.0.18",
+    "@types/node": "^8.0.51",
+    "typescript": "^2.7.2"
+  }
+}

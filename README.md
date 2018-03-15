@@ -1,2 +1,2 @@
-# intro-to-typescript
-This is an intro to typescript presentation and content.
+# madjs-nov-typescript
+Typescript Demo for MadJS November 2017 (Drunken Typescript)

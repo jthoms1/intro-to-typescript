@@ -1,0 +1,605 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Intro to TypeScript - MadJS</title>
+    <link href="//fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+    <!-- Code syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+
+    </script>
+
+    <style>
+      body > div.reveal {
+        font-family: 'Poppins', sans-serif;
+        color: #B9C0D2;
+      }
+      .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
+        font-family: 'Montserrat', sans-serif;
+        color: #FFF;
+        text-transform: none;
+      }
+      .reveal section img.nostyle {
+          background: none;
+          border: none;
+          box-shadow: none;
+          margin: 0;
+      }
+      .reveal section img.roundup {
+          border: 2px solid #fff;
+          height: 40px;
+    	    width: 40px;
+    	    border-radius: 23px;
+    	    display: block;
+    	    margin: -15px auto 0;
+      }
+      .example-num {
+        position: absolute;
+        top: -20px;
+        right: -20px;
+        font-size: 0.8em;
+        color: grey;
+      }
+      b {
+        font-weight: normal;
+        color:aqua;
+      }
+      i {
+        font-style: normal;
+        color: yellow;
+      }
+      img.trans {
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+      }
+    </style>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h3>Intro to TypeScript</h3>
+          <p>
+            <small>
+              Dan Imhoff / <a href="http://twitter.com/dwieeb">@dwieeb</a>
+            </small>
+            <img class="roundup" src="images/dwieeb-logo.jpg" />
+          </p>
+          <p>
+            <small>
+              Josh Thomas / <a href="http://twitter.com/jthoms1">@jthoms1</a>
+            </small>
+            <img class="roundup" src="images/jthoms1-logo.png" />
+          </p>
+        </section>
+
+        <section>
+          <img class="trans" src="images/typescript-logo-lrg.png" width="500" />
+          <blockquote>
+            JavaScript that scales.
+          </blockquote>
+        </section>
+
+        <section>
+          <h2>But what is it?</h2>
+          <ul>
+            <li class="fragment fadein">"Superset" of JavaScript</li>
+            <li class="fragment fadein">Type system for JS<br/>
+              <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html">Basic Types Available</a></li>
+            <li class="fragment fadein">Compiles to plain JS</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Goals of TypeScript</h2>
+          <ul>
+            <li class="fragment fadein">Provide opt-in type system</li>
+            <li class="fragment fadein">Use JS of the future NOW</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Why types?</h2>
+          <ul>
+            <li class="fragment fadein">Improve code quality &amp; understandability</li>
+            <li class="fragment fadein">Boost refactoring speed and effectiveness</li>
+          </ul>
+          <aside class="notes">
+
+          </aside>
+        </section>
+
+        <section>
+          <h2>How do you introduce it to an existing project? (DEMO)</h2>
+          <ul>
+            <li class="fragment fadein">Drop in a tsconfig.json and start compiling</li>
+            <li class="fragment fadein">Incrementally add types</li>
+            <li class="fragment fadein">Get Strict</li>
+            <li class="fragment fadein">Use those new features you have been reading about</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>The Type System</h1>
+        </section>
+
+        <section>
+          <h2>Declaration Spaces</h2>
+          <ul>
+            <li class="fragment fadein"><b>Value space</b>: classes, functions, variables</li>
+            <li class="fragment fadein"><b>Type space</b>: classes, interfaces, type aliases</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Declaring Types</h2>
+          <pre class="fragment fadein"><code>
+          var num: number = 1;
+          </code></pre>
+          <pre class="fragment fadein"><code>
+          function slugify(input: string): string {
+            // implementation
+          }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Implicit vs Explicit</h2>
+          <pre><code>
+          let num = 1; // implicit, AKA inferred
+
+          let num: number = 1; // explicit
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Type Inference</h2>
+          <pre><code>
+          /**
+           * Cases: a &gt; b: return 1
+           *        a &lt; b: return -1
+           *        a = b: return 0
+           */
+          function strcmp(a: string, b: string) {
+            if (a === b) {
+              return 0;
+            }
+
+            return a &gt; b ? 1 : -1;
+          }
+
+          let result = strcmp("foo", "bar");
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Type Assertion</h2>
+          <ul>
+            <li class="fragment fadein">Used to coerce types</li>
+            <li class="fragment fadein">Works on subtypes</li>
+          </ul>
+          <pre class="fragment fadein"><code>
+          // NOPE
+          let team = &lt;number&gt;"Packers";
+          </code></pre>
+          <pre class="fragment fadein"><code>
+          // oh, ok
+          let team = &lt;number&gt;(&lt;any&gt;"Packers");
+
+          console.log(team.toFixed()); // ???
+          </code></pre>
+        </section>
+
+        <section>
+          <pre><code>
+          // type inferred as `{}`
+          let user = {};
+
+          // Error: property 'name' does not exist on `{}`
+          user.name = "Dan";
+          </code></pre>
+        </section>
+
+        <section>
+          <pre><code>
+          interface User {
+            name: string;
+          }
+
+          let user = &lt;User&gt;{};
+
+          // ok
+          user.name = "Dan";
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Type Assertion is Harmful</h2>
+          <ul>
+            <li class="fragment fadein">Overrides the inferred type</li>
+          </ul>
+          <pre class="fragment fadein"><code>
+          interface User {
+            name: string;
+          }
+
+          // no type assertion, `user` has explicit type `User`
+          const user: User = { name: "Dan" };
+          </code></pre>
+        </section>
+
+        <section>
+          <h1>Interfaces</h1>
+        </section>
+
+        <section>
+          <h2>Interfaces</h2>
+          <ul>
+            <li class="fragment fadein">Defined in type declaration space</li>
+            <li class="fragment fadein">Duck typed</li>
+            <li class="fragment fadein">Meant for describing objects, classes, and functions</li>
+            <li class="fragment fadein">Can be named or anonymous</li>
+            <li class="fragment fadein">Can be "implemented"</li>
+            <li class="fragment fadein">Can be "extended"</li>
+            <li class="fragment fadein">Can be "merged"</li>
+          </ul>
+        </section>
+
+        <section>
+          <h2>Implementing Interfaces</h2>
+          <ul>
+            <li class="fragment fadein">"This class <em>must</em> adhere to this interface"</li>
+            <li class="fragment fadein">Classes can implement one or more interfaces</li>
+          </ul>
+          <pre class="fragment fadein"><code>
+          interface Reader {
+            read(bytes: number): string;
+          }
+
+          class FileReader implements Reader {
+            read(bytes: number) {
+              // implementation
+            }
+          }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Extending Interfaces</h2>
+          <pre><code>
+          interface Reader {
+            read(bytes: number): string;
+          }
+
+          interface Writer {
+            write(str: string): void;
+          }
+
+          interface ReadStream extends Reader {
+            pipe(destination: Writer): void;
+          }
+
+          interface ReaderWriter extends Reader, Writer {}
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Merging Interfaces</h2>
+          <ul>
+            <li class="fragment fadein">Common use case of <a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html">Declaration Merging</a></li>
+            <li class="fragment fadein">Used to add to third-party types (<a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation">Module Augmentation</a>)</li>
+          </ul>
+          <pre class="fragment fadein"><code>
+          interface Tea {
+            type: string;
+          }
+
+          interface Tea {
+            country: string;
+            region: string;
+          }
+
+          // thankfully, this is invalid
+          let lipton: Tea = { type: 'green' };
+
+          // ok
+          let assam: Tea = {
+            type: 'black',
+            country: 'India',
+            region: 'Assam',
+          };
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Minimal Interfaces</h2>
+          <ul>
+            <li class="fragment fadein">Only specify what you need</li>
+          </ul>
+        </section>
+
+        <section>
+          <pre><code>
+  interface Car {
+    mpg: number;
+    horsepower: number;
+  }
+
+  interface Rocket {
+    mpg: number;
+    thrust: number;
+  }
+
+  let tesla3: Car = { mpg: Infinity, horsepower: 258 };
+  let saturnV: Rocket = { mpg: 0.000206, thrust: 7891000 };
+
+  function gallons(vehicle: { mpg: number; }, miles: number) {
+    return miles / vehicle.mpg;
+  }
+
+  gallons(tesla3, 100); // 100 miles, 0 gallons needed
+  gallons(saturnV, 1 / 5280); // 1 foot, 1.08768 gallons needed
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Type Aliases</h2>
+          <ul>
+            <li class="fragment fadein">Defined in type declaration space</li>
+            <li class="fragment fadein">Used for type declaration reusability</li>
+          </ul>
+          <pre class="fragment fadein"><code>
+   type MyCustomType = string;
+   type MyCallbackFunc = (err: Error, data: MyInterface) =&gt; void;
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Union Types</h2>
+          <ul>
+            <li class="fragment fadein">Two or more joined types</li>
+            <li class="fragment fadein">"this <b>or</b> that"</li>
+          </ul>
+          <pre class="fragment fadein"><code>
+          let strOrNum: string | number = "a string";
+          strOrNum = 12345; // ok
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Intersection Types</h2>
+          <ul>
+            <li class="fragment fadein">Two or more joined types</li>
+            <li class="fragment fadein">"this <b>and</b> that"</li>
+          </ul>
+          <pre class="fragment fadein"><code>
+          interface Foo {
+            foo: number;
+          }
+
+          interface Bar {
+            bar: number;
+          }
+
+          let foobar: Foo &amp; Bar = { foo: 1, bar: 2 };
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Type Guards</h2>
+          <ul>
+            <li class="fragment fadein">Runtime checks that guarantee types</li>
+          </ul>
+          <pre class="fragment fadein"><code>
+          let name = getName();
+
+          if (typeof name === 'string') {
+            // type of `name` guaranteed to be `string`
+          }
+          </code></pre>
+        </section>
+
+        <section>
+          <pre><code>
+        class Meetup { /* implementation */ }
+
+        class Party { /* implementation */ }
+
+        let event: Meetup | Party = chooseRandomEvent();
+
+        if (event instanceof Meetup) {
+          // `event` is an instance of `Meetup` (or subclass)
+        } else {
+          // going to a party!
+        }
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>User-defined Type Guards</h2>
+          <ul>
+            <li class="fragment fadein">Guarantee custom types</li>
+            <li class="fragment fadein"><em>"HERE BE DRAGONS"</em></li>
+          </ul>
+        </section>
+
+        <section>
+          <pre><code>
+          interface User { id: number; name: string; }
+
+          function isUser(user: any): user is User {
+            return typeof user.id === 'number' &amp;&amp;
+                   typeof user.name === 'string';
+          }
+
+          let user = apiRequest('GET', '/user/12345');
+
+          if (!isUser(user)) {
+            throw new Error('bad user');
+          }
+
+          // `user` adheres to `User` interface
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Generics</h2>
+          <ul>
+            <li class="fragment fadein">Allows a component to work over a variety of types</li>
+            <li class="fragment fadein">In JavaScript, you can have arrays <b>of</b> anything:</li>
+          </ul>
+          <pre class="fragment fadein"><code>
+          let meetups = ["MadJS", "MadPy", "BigData"];
+          </code></pre>
+        </section>
+
+        <section>
+          <pre><code>
+     let meetups: Array&lt;string&gt; = ["MadJS", "MadPy", "BigData"];
+          </code></pre>
+          <pre class="fragment fadein"><code>
+     let meetups: string[] = ["MadJS", "MadPy", "BigData"];
+          </code></pre>
+          <pre class="fragment fadein"><code>
+     let meetups = ["MadJS", "MadPy", "BigData"];
+          </code></pre>
+        </section>
+
+        <section>
+          <pre><code>
+          let p = new Promise&lt;number&gt;(function(resolve, reject) {
+            resolve("nope."); // compile error
+          });
+
+          p.then(function(value) {
+            // 'value' is a number, no explicit types needed
+          });
+          </code></pre>
+        </section>
+
+        <section>
+          <pre><code>
+          function fillArray(array: any[], value: any) {
+            // make copy of array and fill it
+            return array.concat().fill(value);
+          }
+
+          let result = fillArray([1, 2, 3], '');
+
+          // result === ['', '', ''], but the type is any[]
+          </code></pre>
+        </section>
+
+        <section>
+          <pre><code>
+          function fillArray(array: any[], value: string) {
+            // make copy of array and fill it
+            return array.concat().fill(value);
+          }
+
+          let result = fillArray([1, 2, 3], '');
+
+          // result === ['', '', ''] and the type is string[] !!!
+          </code></pre>
+          <pre class="fragment fadein"><code>
+          // oh... :(
+          let result = fillArray([1, 2, 3], 0);
+          </code></pre>
+        </section>
+        <section>
+          <h2>Defining Generics</h2>
+          <ul>
+            <li>Generics have one or more <b>type parameter</b></li>
+          </ul>
+          <pre><code>
+          function fillArray&lt;T&gt;(array: any[], value: T): T[] {
+            // implementation
+          }
+
+          let result = fillArray&lt;string&gt;([1, 2, 3], '');
+          </code></pre>
+          <pre class="fragment fadein"><code>
+          let result = fillArray([1, 2, 3], '');
+          </code></pre>
+        </section>
+
+        <section>
+          <img src="images/whos-the-master.gif" width=500>
+        </section>
+
+        <section>
+          <h2>Questions?</h2>
+          <br/>
+          <ul>
+            <li>
+              <a href="https://github.com/dzharii/awesome-typescript">https://github.com/dzharii/awesome-typescript</a>
+            </li>
+            <li>
+              <a href="https://basarat.gitbooks.io/typescript/content/">https://basarat.gitbooks.io/typescript/content/</a>
+            </li>
+            <li>
+              <a href="https://tc39.github.io/process-document/">https://tc39.github.io/process-document/</a>
+            </li>
+          </ul>
+        </section>
+
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+
+      // Full list of configuration options available at:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+
+        transition: 'none', // none/fade/slide/convex/concave/zoom
+
+        // Optional reveal.js plugins
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>
