@@ -174,10 +174,10 @@
         <section>
           <h2>Typescript's Beginnings</h2>
           <ul>
-            <li class="fragment fadein">Released in October 2012 (0.8)</li><br/>
-            <li class="fragment fadein">Created by Anders Hejlsberg</li><br/>
-            <li class="fragment fadein">Open Source</li><br/>
-            <li class="fragment fadein">Created because of the explosive growth of JavaScript</li>
+            <li class="fragment">Released in October 2012 (0.8)</li><br/>
+            <li class="fragment">Created by Anders Hejlsberg</li><br/>
+            <li class="fragment">Open Source</li><br/>
+            <li class="fragment">Created because of the explosive growth of JavaScript</li>
           </ul>
           <aside class="notes">
             <li>Anders Created Turbo Pascal, Delphi, C#</li>
@@ -226,33 +226,31 @@
 
         <section>
           <h2>Goals of TypeScript</h2>
-          <ul>
-            <li class="fragment fadein">Provide opt-in type system</li>
-            <li class="fragment fadein">Use JS of the future NOW</li>
-          </ul>
-          <aside class="notes">
-
-          </aside>
+          <img src="images/ts-goals.png" />
         </section>
 
         <section>
           <h2>Why types?</h2>
           <ul>
-            <li class="fragment fadein">Improve code quality &amp; understandability</li>
-            <li class="fragment fadein">Boost refactoring speed and effectiveness</li>
+            <li class="fragment">Improve code quality &amp; understandability</li>
+            <li class="fragment">Boost refactoring speed and effectiveness</li>
           </ul>
           <aside class="notes">
-
+            <li>Whether you realize it or not when you read JS code you are inferring what types variables are.
+              But you are not doing a very good job. Why not be explicit and let the compiler tell you if you are wrong.
+            <li>This is really hard to explain until you try it for the first time.  There is a really large amount
+              of confidence you gather when rewriting parts of the system knowing if it affects other parts you will know
+              based on compiler errors.
           </aside>
         </section>
 
         <section>
           <h2>How do you introduce it to an existing project? (DEMO)</h2>
           <ul>
-            <li class="fragment fadein">Drop in a tsconfig.json and start compiling</li>
-            <li class="fragment fadein">Incrementally add types</li>
-            <li class="fragment fadein">Get Strict</li>
-            <li class="fragment fadein">Use those new features you have been reading about</li>
+            <li class="fragment">Drop in a tsconfig.json and start compiling</li>
+            <li class="fragment">Incrementally add types</li>
+            <li class="fragment">Get Strict</li>
+            <li class="fragment">Use those new features you have been reading about</li>
           </ul>
           <aside class="notes">
 
@@ -266,27 +264,27 @@
         <section>
           <h2>Type System</h2>
           <ul>
-            <li class="fragment fadein"><b>Static, but gradual</b>: types don't change during runtime, but are opt-in</li>
-            <li class="fragment fadein"><b>Structural</b>: structure of an object preferred over the name of its class</li>
-            <li class="fragment fadein"><b>Inferred</b>: data types of expressions can be inferred by the compiler</li>
-            <li class="fragment fadein"><b>Duck typing</b></li>
+            <li class="fragment"><b>Static, but gradual</b>: types don't change during runtime, but are opt-in</li>
+            <li class="fragment"><b>Structural</b>: structure of an object preferred over the name of its class</li>
+            <li class="fragment"><b>Inferred</b>: data types of expressions can be inferred by the compiler</li>
+            <li class="fragment"><b>Duck typing</b></li>
           </ul>
         </section>
 
         <section>
           <h2>Declaration Spaces</h2>
           <ul>
-            <li class="fragment fadein"><b>Value space</b>: classes, functions, variables</li>
-            <li class="fragment fadein"><b>Type space</b>: classes, interfaces, type annotations &amp; aliases</li>
+            <li class="fragment"><b>Value space</b>: classes, functions, variables</li>
+            <li class="fragment"><b>Type space</b>: classes, interfaces, type annotations &amp; aliases</li>
           </ul>
         </section>
 
         <section>
           <h2>Declaring Types</h2>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment"><code>
           var num: number = 1;
           </code></pre>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment"><code>
           function slugify(input: string): string {
             // implementation
           }
@@ -329,22 +327,22 @@
         <section>
           <h2>Interfaces</h2>
           <ul>
-            <li class="fragment fadein">Defined in type declaration space</li>
-            <li class="fragment fadein">Duck typed</li>
-            <li class="fragment fadein">Meant for describing the shape of objects, classes, and functions</li>
-            <li class="fragment fadein">Can be named or anonymous</li>
-            <li class="fragment fadein">Can be "implemented"</li>
-            <li class="fragment fadein">Can be "extended"</li>
+            <li class="fragment">Defined in type declaration space</li>
+            <li class="fragment">Duck typed</li>
+            <li class="fragment">Meant for describing the shape of objects, classes, and functions</li>
+            <li class="fragment">Can be named or anonymous</li>
+            <li class="fragment">Can be "implemented"</li>
+            <li class="fragment">Can be "extended"</li>
           </ul>
         </section>
 
         <section>
           <h2>Implementing Interfaces</h2>
           <ul>
-            <li class="fragment fadein">"This class <em>must</em> adhere to this interface"</li>
-            <li class="fragment fadein">Classes can implement one or more interfaces</li>
+            <li class="fragment">"This class <em>must</em> adhere to this interface"</li>
+            <li class="fragment">Classes can implement one or more interfaces</li>
           </ul>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment"><code>
           interface Reader {
             read(bytes: number): string;
           }
@@ -379,10 +377,10 @@
         <section>
           <h2>Type Aliases</h2>
           <ul>
-            <li class="fragment fadein">Defined in type declaration space</li>
-            <li class="fragment fadein">Used for type declaration reusability</li>
+            <li class="fragment">Defined in type declaration space</li>
+            <li class="fragment">Used for type declaration reusability</li>
           </ul>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment"><code>
    type MyCustomType = string;
    type MyCallbackFunc = (err: Error, data: MyInterface) =&gt; void;
           </code></pre>
@@ -391,10 +389,10 @@
         <section>
           <h2>Union Types</h2>
           <ul>
-            <li class="fragment fadein">Two or more joined types</li>
-            <li class="fragment fadein">"this <b>or</b> that"</li>
+            <li class="fragment">Two or more joined types</li>
+            <li class="fragment">"this <b>or</b> that"</li>
           </ul>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment"><code>
           let strOrNum: string | number = "a string";
           strOrNum = 12345; // ok
           </code></pre>
@@ -403,10 +401,10 @@
         <section>
           <h2>Intersection Types</h2>
           <ul>
-            <li class="fragment fadein">Two or more joined types</li>
-            <li class="fragment fadein">"this <b>and</b> that"</li>
+            <li class="fragment">Two or more joined types</li>
+            <li class="fragment">"this <b>and</b> that"</li>
           </ul>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment"><code>
           interface Foo {
             foo: number;
           }
@@ -422,10 +420,10 @@
         <section>
           <h2>Generics</h2>
           <ul>
-            <li class="fragment fadein">Allows a component to work over a variety of types</li>
-            <li class="fragment fadein">In JavaScript, you can have arrays <b>of</b> anything:</li>
+            <li class="fragment ">Allows a component to work over a variety of types</li>
+            <li class="fragment ">In JavaScript, you can have arrays <b>of</b> anything:</li>
           </ul>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment "><code>
           let meetups = ["GDG", "MadJS", "MadPy"];
           </code></pre>
         </section>
@@ -434,10 +432,10 @@
           <pre><code>
      let meetups: Array&lt;string&gt; = ["GDG", "MadJS", "MadPy"];
           </code></pre>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment "><code>
      let meetups: string[] = ["GDG", "MadJS", "MadPy"];
           </code></pre>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment "><code>
      let meetups = ["GDG", "MadJS", "MadPy"];
           </code></pre>
         </section>
@@ -466,7 +464,7 @@
 
           let result = fillArray&lt;string&gt;([1, 2, 3], '');
           </code></pre>
-          <pre class="fragment fadein"><code>
+          <pre class="fragment "><code>
           let result = fillArray([1, 2, 3], '');
           </code></pre>
         </section>
