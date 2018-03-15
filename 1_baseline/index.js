@@ -1,20 +1,43 @@
-var path = require('path');
-var fs = require('fs');
-var dirPath = process.argv[2];
-if (!dirPath) {
-    throw new Error('A directory path was not provided.');
+var itemList = [
+  {
+    name: 'ChiTown Original',
+    toppings: ['cheese', 'sausage', 'pepperoni'],
+    crust: 'deepdish',
+    cityOfOrigin: 'Chicago, Illinois',
+    cost: 20
+  },
+  {
+    name: 'Hawaiian',
+    toppings: ['cheese', 'pineapple', 'canadian bacon'],
+    crust: 'handtossed',
+    cityOfOrigin: 'Chatham, Ontario',
+    cost: 15
+  }
+];
+
+function getMyPizza(myFavorite, money) {
+
+  var foundItems = itemList.filter((item) => {
+    return item.name === myFavorite;
+  });
+  var foundItem = foundItems[0];
+
+  if (canPurchase(foundItem, money)) {
+    return foundItem;
+  }
+  return null;
 }
-var fullPath = path.resolve(dirPath);
-var files = fs.readdirSync(fullPath);
-files.sort();
-console.log('Contents of directory ' + fullPath);
-for (var i = 0; i < files.length; i++) {
-    var fileName = files[i];
-    var isHidden = fileName.charAt[0] === '.';
-    var filePath = path.join(dirPath, fileName);
-    var fileStat = fs.statSync(filePath);
-    var isDirectory = fileStat.isDirectory();
-    var messageLine = (isDirectory ? "d" : '-') + " " +
-        files[i];
-    console.log(messageLine);
+
+function canPurchase(pizza, money) {
+  return pizza.cost <= money;
 }
+
+var myPizza = getMyPizza('ChiTown Original', 20);
+
+console.log(`
+************************************
+
+    You order a ${myPizza.name}
+
+************************************
+`);
