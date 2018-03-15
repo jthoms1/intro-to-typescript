@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8">
 
-    <title>Intro to TypeScript - MadJS</title>
+    <title>Intro to TypeScript - GDG</title>
     <link href="//fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
     <link href="//fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
@@ -154,7 +154,7 @@
           <h2>Declaration Spaces</h2>
           <ul>
             <li class="fragment fadein"><b>Value space</b>: classes, functions, variables</li>
-            <li class="fragment fadein"><b>Type space</b>: classes, interfaces, type aliases</li>
+            <li class="fragment fadein"><b>Type space</b>: classes, interfaces, type annotations &amp; aliases</li>
           </ul>
         </section>
 
@@ -200,62 +200,6 @@
         </section>
 
         <section>
-          <h2>Type Assertion</h2>
-          <ul>
-            <li class="fragment fadein">Used to coerce types</li>
-            <li class="fragment fadein">Works on subtypes</li>
-          </ul>
-          <pre class="fragment fadein"><code>
-          // NOPE
-          let team = &lt;number&gt;"Packers";
-          </code></pre>
-          <pre class="fragment fadein"><code>
-          // oh, ok
-          let team = &lt;number&gt;(&lt;any&gt;"Packers");
-
-          console.log(team.toFixed()); // ???
-          </code></pre>
-        </section>
-
-        <section>
-          <pre><code>
-          // type inferred as `{}`
-          let user = {};
-
-          // Error: property 'name' does not exist on `{}`
-          user.name = "Dan";
-          </code></pre>
-        </section>
-
-        <section>
-          <pre><code>
-          interface User {
-            name: string;
-          }
-
-          let user = &lt;User&gt;{};
-
-          // ok
-          user.name = "Dan";
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Type Assertion is Harmful</h2>
-          <ul>
-            <li class="fragment fadein">Overrides the inferred type</li>
-          </ul>
-          <pre class="fragment fadein"><code>
-          interface User {
-            name: string;
-          }
-
-          // no type assertion, `user` has explicit type `User`
-          const user: User = { name: "Dan" };
-          </code></pre>
-        </section>
-
-        <section>
           <h1>Interfaces</h1>
         </section>
 
@@ -264,11 +208,10 @@
           <ul>
             <li class="fragment fadein">Defined in type declaration space</li>
             <li class="fragment fadein">Duck typed</li>
-            <li class="fragment fadein">Meant for describing objects, classes, and functions</li>
+            <li class="fragment fadein">Meant for describing the shape of objects, classes, and functions</li>
             <li class="fragment fadein">Can be named or anonymous</li>
             <li class="fragment fadein">Can be "implemented"</li>
             <li class="fragment fadein">Can be "extended"</li>
-            <li class="fragment fadein">Can be "merged"</li>
           </ul>
         </section>
 
@@ -307,65 +250,6 @@
           }
 
           interface ReaderWriter extends Reader, Writer {}
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Merging Interfaces</h2>
-          <ul>
-            <li class="fragment fadein">Common use case of <a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html">Declaration Merging</a></li>
-            <li class="fragment fadein">Used to add to third-party types (<a href="https://www.typescriptlang.org/docs/handbook/declaration-merging.html#module-augmentation">Module Augmentation</a>)</li>
-          </ul>
-          <pre class="fragment fadein"><code>
-          interface Tea {
-            type: string;
-          }
-
-          interface Tea {
-            country: string;
-            region: string;
-          }
-
-          // thankfully, this is invalid
-          let lipton: Tea = { type: 'green' };
-
-          // ok
-          let assam: Tea = {
-            type: 'black',
-            country: 'India',
-            region: 'Assam',
-          };
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>Minimal Interfaces</h2>
-          <ul>
-            <li class="fragment fadein">Only specify what you need</li>
-          </ul>
-        </section>
-
-        <section>
-          <pre><code>
-  interface Car {
-    mpg: number;
-    horsepower: number;
-  }
-
-  interface Rocket {
-    mpg: number;
-    thrust: number;
-  }
-
-  let tesla3: Car = { mpg: Infinity, horsepower: 258 };
-  let saturnV: Rocket = { mpg: 0.000206, thrust: 7891000 };
-
-  function gallons(vehicle: { mpg: number; }, miles: number) {
-    return miles / vehicle.mpg;
-  }
-
-  gallons(tesla3, 100); // 100 miles, 0 gallons needed
-  gallons(saturnV, 1 / 5280); // 1 foot, 1.08768 gallons needed
           </code></pre>
         </section>
 
@@ -413,82 +297,25 @@
         </section>
 
         <section>
-          <h2>Type Guards</h2>
-          <ul>
-            <li class="fragment fadein">Runtime checks that guarantee types</li>
-          </ul>
-          <pre class="fragment fadein"><code>
-          let name = getName();
-
-          if (typeof name === 'string') {
-            // type of `name` guaranteed to be `string`
-          }
-          </code></pre>
-        </section>
-
-        <section>
-          <pre><code>
-        class Meetup { /* implementation */ }
-
-        class Party { /* implementation */ }
-
-        let event: Meetup | Party = chooseRandomEvent();
-
-        if (event instanceof Meetup) {
-          // `event` is an instance of `Meetup` (or subclass)
-        } else {
-          // going to a party!
-        }
-          </code></pre>
-        </section>
-
-        <section>
-          <h2>User-defined Type Guards</h2>
-          <ul>
-            <li class="fragment fadein">Guarantee custom types</li>
-            <li class="fragment fadein"><em>"HERE BE DRAGONS"</em></li>
-          </ul>
-        </section>
-
-        <section>
-          <pre><code>
-          interface User { id: number; name: string; }
-
-          function isUser(user: any): user is User {
-            return typeof user.id === 'number' &amp;&amp;
-                   typeof user.name === 'string';
-          }
-
-          let user = apiRequest('GET', '/user/12345');
-
-          if (!isUser(user)) {
-            throw new Error('bad user');
-          }
-
-          // `user` adheres to `User` interface
-          </code></pre>
-        </section>
-
-        <section>
           <h2>Generics</h2>
           <ul>
             <li class="fragment fadein">Allows a component to work over a variety of types</li>
             <li class="fragment fadein">In JavaScript, you can have arrays <b>of</b> anything:</li>
           </ul>
           <pre class="fragment fadein"><code>
-          let meetups = ["MadJS", "MadPy", "BigData"];
+          let meetups = ["GDG", "MadJS", "MadPy"];
           </code></pre>
         </section>
 
         <section>
           <pre><code>
-     let meetups: Array&lt;string&gt; = ["MadJS", "MadPy", "BigData"];
+     let meetups: Array&lt;string&gt; = ["GDG", "MadJS", "MadPy"];
           </code></pre>
           <pre class="fragment fadein"><code>
-     let meetups: string[] = ["MadJS", "MadPy", "BigData"];
+     let meetups: string[] = ["GDG", "MadJS", "MadPy"];
           </code></pre>
           <pre class="fragment fadein"><code>
-     let meetups = ["MadJS", "MadPy", "BigData"];
+     let meetups = ["GDG", "MadJS", "MadPy"];
           </code></pre>
         </section>
 
@@ -505,35 +332,6 @@
         </section>
 
         <section>
-          <pre><code>
-          function fillArray(array: any[], value: any) {
-            // make copy of array and fill it
-            return array.concat().fill(value);
-          }
-
-          let result = fillArray([1, 2, 3], '');
-
-          // result === ['', '', ''], but the type is any[]
-          </code></pre>
-        </section>
-
-        <section>
-          <pre><code>
-          function fillArray(array: any[], value: string) {
-            // make copy of array and fill it
-            return array.concat().fill(value);
-          }
-
-          let result = fillArray([1, 2, 3], '');
-
-          // result === ['', '', ''] and the type is string[] !!!
-          </code></pre>
-          <pre class="fragment fadein"><code>
-          // oh... :(
-          let result = fillArray([1, 2, 3], 0);
-          </code></pre>
-        </section>
-        <section>
           <h2>Defining Generics</h2>
           <ul>
             <li>Generics have one or more <b>type parameter</b></li>
@@ -548,10 +346,6 @@
           <pre class="fragment fadein"><code>
           let result = fillArray([1, 2, 3], '');
           </code></pre>
-        </section>
-
-        <section>
-          <img src="images/whos-the-master.gif" width=500>
         </section>
 
         <section>
