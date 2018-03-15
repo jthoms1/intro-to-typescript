@@ -27,9 +27,18 @@
     </script>
 
     <style>
+      .reveal h2 {
+        margin-bottom: 40px;
+      }
       body > div.reveal {
         font-family: 'Poppins', sans-serif;
         color: #B9C0D2;
+      }
+      img.emoji {
+        width: 45px;
+      }
+      h2 img.emoji {
+        width: 52px;
       }
       .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5 {
         font-family: 'Montserrat', sans-serif;
@@ -101,39 +110,117 @@
         </section>
 
         <section>
+          <h2>
+            <span>
+              I <img class="nostyle emoji" src="images/heart.png"/> JavaScript
+            </span>
+          </h2>
+          <aside class="notes">
+            <li>I joined Ionic 2 years ago.
+            <li>At the time I was writing primarily React applications
+            <li>My preferred experience was Babel and a well tuned Eslint config.
+            <li>And I loved writing JavaScript.
+          </aside>
+        </section>
+        <section>
+          <h2>
+            <span>
+              I <img class="nostyle emoji" src="images/broken-heart.png"/> TypeScript
+            </span>
+          </h2>
+          <aside class="notes">
+            <li>6 months after started I was tasked with rewriting our Node CLI in Typescript.
+            <li>It took about 2 weeks of constantly fighting with the compiler before I
+              started to feel comfortable and began embracing it.
+          </aside>
+        </section>
+        <section>
+          <h2>
+            <span>
+              I <img class="nostyle emoji" src="images/heart.png"/> TypeScript
+            </span>
+          </h2>
+          <aside class="notes">
+            <li>I still consider myself new to Typescript even after writing it for 1 1/2 years.
+            <li>I would say now I love TypeScript more.</li>
+          </aside>
+        </section>
+
+        <section>
+          <img class="nostyle rounded" src="images/twitter-ts-love.png"/>
+          <aside class="notes">
+            <li>I should now consider myself an evangelist.</li>
+          </aside>
+        </section>
+
+        <section>
+          <h2>I am not the only one.</h2>
+          <img src="images/loved-languages.png" />
+          <aside class="notes">
+            <li>Recent survey by Stack Overflow showing most loved languages</li>li>
+          </aside>
+        </section>
+
+        <section>
           <img class="trans" src="images/typescript-logo-lrg.png" width="500" />
           <blockquote>
             JavaScript that scales.
           </blockquote>
           <aside class="notes">
-
+            <li>This is the tagline the team has given to typescript.
           </aside>
         </section>
 
         <section>
           <h2>Typescript's Beginnings</h2>
+          <ul>
+            <li class="fragment fadein">Released in October 2012 (0.8)</li><br/>
+            <li class="fragment fadein">Created by Anders Hejlsberg</li><br/>
+            <li class="fragment fadein">Open Source</li><br/>
+            <li class="fragment fadein">Created because of the explosive growth of JavaScript</li>
+          </ul>
           <aside class="notes">
-
+            <li>Anders Created Turbo Pascal, Delphi, C#</li>
+            <li>First public release was Open Source, not sure if it was the first
+              from Microsoft but it was seen as a turning point for Microsoft's relationship
+              with developers.
+            </li>
+            <li>Microsoft saw that some tools were being built to create JavaScript where
+              the source language was not JS. They felt with the way JS was moving it was important
+              to have a language that was closer to the source but still be able to create large
+              reliable codebases.
+            </li>
           </aside>
         </section>
 
         <section>
           <h2>Who is using it?</h2>
+          <ul>
+            <li>Google</li>
+            <li>Angular</li>
+            <li>Lyft</li>
+            <li>Microsoft</li>
+            <li>Dojo</li>
+            <li>Ionic</li>
+            <li>Epic</li>
+          </ul>
           <aside class="notes">
-
+            These are just the ones off the top of my head.
           </aside>
         </section>
 
         <section>
           <h2>But what is it?</h2>
           <ul>
-            <li class="fragment fadein">"Superset" of JavaScript</li>
-            <li class="fragment fadein">Type system for JS<br/>
-              <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html">Basic Types Available</a></li>
-            <li class="fragment fadein">Compiles to plain JS</li>
+            <li class="fragment">"Superset" of JavaScript</li><br/>
+            <li class="fragment">Type system for JS
+              <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html">Basic Types Available</a></li><br/>
+            <li class="fragment">Compiles to plain JS</li>
           </ul>
           <aside class="notes">
-
+            <li>This means that JavaScript is valid Typescript.  Typescript has optional types that you can add.</li>
+            <li>A type system is a way of describing all the possible types of a varible, expression, function, class, etc.</li>
+            <li>Compiles similar to Babel down to ES6, ES5, ES3 etc.</li>
           </aside>
         </section>
 
